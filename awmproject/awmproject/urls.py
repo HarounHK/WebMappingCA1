@@ -13,9 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# awmproject/urls.py
 from django.contrib import admin
 from django.urls import path
+from map import views  # Import views from the map app
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('map/', views.map_view, name='map'),  # /map/ URL for map view
 ]
