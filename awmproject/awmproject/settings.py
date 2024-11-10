@@ -74,13 +74,24 @@ WSGI_APPLICATION = 'awmproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+GDAL_LIBRARY_PATH = r'C:\Users\BigHK\miniconda3\envs\awm_env\Library\bin\gdal.dll'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis', 
+        'NAME': 'gis', 
+        'USER': 'docker',  
+        'PASSWORD': 'docker',  
+        'HOST': '127.0.0.1',  
+        'PORT': '25432',  
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
