@@ -41,3 +41,7 @@ services:
       - .:/app
     depends_on:
       - postgis
+
+volumes:
+  my_pgadmin4_data:
+  my_first_spatialdb_data:

@@ -2,22 +2,24 @@ FROM continuumio/miniconda3
 
 LABEL maintainer="Haroun Kassouri"
 
-# I use the geodjango_tutorial as my project name adjust to your project name
 ENV PYTHONUNBUFFERED=1
-ENV DJANGO_SETTINGS_MODULE=restaurant_finder.settings
+ENV DJANGO_SETTINGS_MODULE=geodjango.settings
 
+RUN mkdir -p /app
 WORKDIR /app
 
-# Create the environment:
 COPY ENV.yml .
 RUN conda env create -f ENV.yml
 
-# Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
+RUN echo "conda activate awm_env" >> ~/.bashrc
+SHELL ["/bin/bash", "--login", "-c"]
+
+COPY . /app
 ENV PYTHONPATH="/app"
 
-# Exposing the port that the container will operate feel free to change if port is taken
+COPY manage.py .
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "awm_env"]
+
 EXPOSE 8001
 
-# Start the server when the container starts
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]
+CMD ["python", "manage.py", "runserver", "localhost:8001"]
