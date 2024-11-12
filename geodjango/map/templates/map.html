@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Location Detail</title>
-
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
     <style>
         #map {
             height: 400px;
@@ -16,25 +13,40 @@
     </style>
 </head>
 <body>
-    {% for location in locations %}
-        <h1>{{ location.name }}</h1>
-        <p>{{ location.address }}</p>
 
-        <div id="map"></div>
+    <!-- Search bar -->
+    <form method="get" action="{% url 'map:map' %}">
+        <input type="text" name="query" placeholder="Search for a location" value="{{ request.GET.query }}">
+        <button type="submit">Search</button>
+    </form>
 
-        <!-- Leaflet JS -->
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <script>
-            var map = L.map('map').setView([{{ location.latitude }}, {{ location.longitude }}], 13);
+    <!-- Link to add a new location -->
+    <a href="{% url 'map:add_location' %}">Add a New Location</a>
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+    <!-- Map container (only one map) -->
+    <div id="map"></div>
 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([53.3498, -6.2603], 10);  // Default view to a central location
+
+        // Set up the OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Loop through the locations and add markers
+        {% for location in locations %}
             L.marker([{{ location.latitude }}, {{ location.longitude }}]).addTo(map)
-                .bindPopup('<b>{{ location.name }}</b><br />{{ location.address }}')
-                .openPopup();
-        </script>
-    {% endfor %}
+                .bindPopup('<b>{{ location.name }}</b><br />{{ location.address }}');
+        {% endfor %}
+    </script>
+
+    <!-- No Results Message -->
+    {% if locations.count == 0 %}
+        <p>No locations found matching your search.</p>
+    {% endif %}
+
 </body>
 </html>
