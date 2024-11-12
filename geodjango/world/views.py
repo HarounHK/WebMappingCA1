@@ -9,7 +9,6 @@ from .forms import SignUpForm
 from django.contrib.gis.geos.point import Point
 from django.http import JsonResponse
 
-# Create your views here.
 
 # View that reads the locations from world borders and passes on to maps
 def map_view(request):
