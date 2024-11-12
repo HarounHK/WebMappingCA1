@@ -17,7 +17,6 @@ world_mapping = {
     'mpoly': 'MULTIPOLYGON',
 }
 
-# Fix: Use Path(__file__).resolve() to get the correct path
 world_shp = Path(__file__).resolve().parent / 'data' / 'TM_WORLD_BORDERS-0.3.shp'
 
 def run(verbose=True):
