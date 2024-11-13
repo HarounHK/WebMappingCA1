@@ -15,17 +15,17 @@ making it easier to find parking near their destination.
  Project Requirements
 ######################
 
-Database: PostgreSQL with PostGIS ✅ Done
-Database Management: PgAdmin4     ✅ Done
-Backend (Middle Tier): Django     ✅ Done
-Frontend: Responsive web application with a user-friendly interface using Bootstrap 5 ✅ Done
-Mapping Service: Leaflet JS with OpenStreetMap    ✅ Done
+Database: PostgreSQL with PostGIS 
+Database Management: PgAdmin4     
+Backend (Middle Tier): Django    
+Frontend: Responsive web application with a user-friendly interface using Bootstrap 5 
+Mapping Service: Leaflet JS with OpenStreetMap    
 Deployment: Dockerized components deployed on a cloud-facing virtual machine with an SSL certificate
 
-Create/store/manipulate spatial data, hence PostgreSQL/PostGIS. ✅ Done
-Create a middle layer based on the Model-View-Controller (MVC) pattern, hence Django. ✅ Done
-Create an application, usable on any platform, hence responsive design. ✅ Done
-Be accessible securely from the Web, hence cloud deployment ✅ Done
+Create/store/manipulate spatial data, hence PostgreSQL/PostGIS.
+Create a middle layer based on the Model-View-Controller (MVC) pattern, hence Django. 
+Create an application, usable on any platform, hence responsive design. 
+Be accessible securely from the Web, hence cloud deployment 
 
 ########################################
  What would I add if I had more time:
