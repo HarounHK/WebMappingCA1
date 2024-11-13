@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import WorldBorder, Profile as user
+from .models import Location
 
-# authentication
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm
@@ -12,7 +12,6 @@ from django.http import JsonResponse
 
 # View that reads the locations from world borders and passes on to maps
 def map_view(request):
-    # expand the code by setting the authentication here
     if request.user.is_authenticated:
         user_profile = user.objects.get(user=request.user)
         location = user_profile.location
@@ -63,3 +62,35 @@ def update_location(request):
         user.save()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False})
+
+# View to search for a specific location from database
+def search_location(request):
+    query = request.GET.get('q', '')
+    
+    locations = Location.objects.filter(name__icontains=query) | Location.objects.filter(address__icontains=query)
+    
+    location_data = []
+    for location in locations:
+        location_data.append({
+            'name': location.name,
+            'address': location.address,
+            'latitude': location.latitude,
+            'longitude': location.longitude
+        })
+
+    return JsonResponse({'locations': location_data})
+
+# View to get all locations
+def get_all_locations(request):
+    locations = Location.objects.all()  
+    location_data = []
+    
+    for location in locations:
+        location_data.append({
+            'name': location.name,
+            'address': location.address,
+            'latitude': location.latitude,
+            'longitude': location.longitude
+        })
+    
+    return JsonResponse({'locations': location_data})

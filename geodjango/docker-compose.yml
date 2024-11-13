@@ -17,7 +17,7 @@ services:
       - "20080:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: c21508813@tudublin.ie
-      PGADMIN_DEFAULT_PASSWORD: Harounkassouri1
+      PGADMIN_DEFAULT_PASSWORD: password
     #volumes:
     #  - my_pgadmin4_data:/var/lib/postgresql/data
 
@@ -41,7 +41,3 @@ services:
       - .:/app
     depends_on:
       - postgis
-
-volumes:
-  my_pgadmin4_data:
-  my_first_spatialdb_data:
