@@ -25,9 +25,3 @@ Create/store/manipulate spatial data, hence PostgreSQL/PostGIS.
 Create a middle layer based on the Model-View-Controller (MVC) pattern, hence Django. 
 Create an application, usable on any platform, hence responsive design. 
 Be accessible securely from the Web, hence cloud deployment 
-
-########################################
- What would I add if I had more time:
-########################################
-
-If I had more time I would add a feature to allow user to add parking lots to favourites section and to be able to access them when needed.
